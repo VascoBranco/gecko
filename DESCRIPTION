@@ -1,0 +1,27 @@
+Package: gecko
+Type: Package
+Title: GECKO - Geographical Ecology and Conservation Knowledge Online
+Version: 0.1.0
+Depends: R (>= 4.1.0)
+Imports: raster, sp, gdistance, grDevices, graphics, stats, utils, geosphere
+BugReports: https://github.com/VascoBranco/gecko/issues
+Authors@R: c(person("Vasco V.", "Branco", role = c("cre","aut"),  
+			email = "vasco.branco@helsinki.fi", 
+			comment = c(ORCID = "0000-0001-7797-3183")),
+			person("Pedro", "Cardoso", role = c("aut"),  
+			email = "pedro.cardoso@helsinki.fi", 
+			comment = c(ORCID = "0000-0001-8119-9960")),
+			person("Luís", "Correia", role = c("ctb"),  
+			email = "luis.correia@ciencias.ulisboa.pt", 
+			comment = c(ORCID = "0000-0003-2439-1168")))
+Author: Vasco V. Branco [aut] (<https://orcid.org/0000-0001-7797-3183>),
+  Pedro Cardoso [aut],
+  Luís Correia [ctb]
+Maintainer: Vasco V. Branco <vasco.branco@helsinki.fi>
+Description: GECKO is a package. A good package.
+License: GPL-2
+Encoding: UTF-8
+RoxygenNote: 7.1.2
+Repository: CRAN
+LazyLoading: True
+NeedsCompilation: no
