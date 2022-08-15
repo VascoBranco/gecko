@@ -50,7 +50,7 @@ map.draw <- function(longlat = NULL, layer, spName,  borders = FALSE, scale = TR
 #' @details EOO is calculated as the minimum convex polygon covering all known or predicted sites for the species.
 #' @return A single value in km2 or a vector with lower confidence limit, consensus and upper confidence limit (probabilities 0.975, 0.5 and 0.025 respectively).
 eoo <- function(spData){
-  if(class(spData) == "RasterLayer"){
+  if(is(spData, "RasterLayer")){
     if(!all(raster::as.matrix(spData) == floor(raster::as.matrix(spData)), na.rm = TRUE)){ #if probabilistic map
       upMap <- raster::reclassify(spData, matrix(c(0,0.025,0,0.025,1,1), ncol = 3, byrow = TRUE))
       consensusMap <- raster::reclassify(spData, matrix(c(0,0.499,0,0.499,1,1), ncol = 3, byrow = TRUE))
