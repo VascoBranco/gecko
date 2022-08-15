@@ -14,14 +14,14 @@ Authors@R: c(person("Vasco V.", "Branco", role = c("cre","aut"),
 			person("Luís", "Correia", role = c("ctb"),  
 			email = "luis.correia@ciencias.ulisboa.pt", 
 			comment = c(ORCID = "0000-0003-2439-1168")))
-Author: Vasco V. Branco [aut] (<https://orcid.org/0000-0001-7797-3183>),
-  Pedro Cardoso [aut],
-  Luís Correia [ctb]
+Author: Vasco V. Branco [cre, aut] (<https://orcid.org/0000-0001-7797-3183>),
+  Pedro Cardoso [aut] (<https://orcid.org/0000-0001-8119-9960>),
+  Luís Correia [ctb] (<https://orcid.org/0000-0003-2439-1168>)
 Maintainer: Vasco V. Branco <vasco.branco@helsinki.fi>
 Description: GECKO is a suite of geographical analysis functions aimed primarily at ecology and conservation science studies. 
 License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Repository: CRAN
-LazyLoading: True
+LazyData: True
 NeedsCompilation: no
