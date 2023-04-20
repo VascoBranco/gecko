@@ -1,21 +1,21 @@
 #####GECKO - Geographical Ecology and Conservation Knowledge Online
-#####Version 0.0.1 (2022-05-28)
+#####Version 0.1.1 (2022-05-28)
 #####By Vasco Branco, Pedro Cardoso, Luís Correia
 #####Maintainer: vasco.branco@helsinki.fi
-#####Changed from v0.0.0:
-#####Everything new
+#####Changed from v0.1.0:
+#####Temporarily removed the "cost" option from distance()
 
 ############################################################################
 ##################################PACKAGES##################################
 ############################################################################
 #' @importFrom raster mask trim terrain rasterToPoints rasterize distanceFromPoints minValue extract plot stack sampleRandom predict layerStats getValues scalebar xmin xmax reclassify
-#' @importFrom gdistance geoCorrection transition accCost
 #' @importFrom grDevices dev.copy dev.off chull pdf
 #' @importFrom sp SpatialPolygons Polygons Polygon
 #' @importFrom graphics par text lines points
 #' @importFrom stats as.dist dist prcomp
 #' @importFrom utils data
 #' @importFrom geosphere areaPolygon
+#' @importFrom methods is
 NULL
 #> NULL 
 
@@ -164,11 +164,12 @@ create.north <- function(dem){
 #' Create distance layer.
 #' @description Creates a layer depicting distances to records using the minimum, average, distance to the minimum convex polygon or distance taking into account a cost surface.
 #' @param longlat Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.
-#' @param layers Raster* object as defined by package raster to serve as model to create distance layer. Cost surface in case of param ="cost".
-#' @param type text string indicating whether the output should be the "minimum", "average", "mcp" or "cost" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.
+#' @param layers Raster* object as defined by package raster to serve as model to create distance layer.
+#' @param type text string indicating whether the output should be the "minimum", "average" or "mcp" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.
 #' @details Using distance to records in models may help limiting the extrapolation of the predicted area much beyond known areas.
 #' @return A RasterLayer object.
-#' @examples data(gecko.layers)
+#' @examples userpar <- par(no.readonly = TRUE) 
+#' data(gecko.layers)
 #' alt = gecko.layers[[3]]
 #' data(gecko.records)
 #' par(mfrow=c(3,2))
@@ -177,7 +178,7 @@ create.north <- function(dem){
 #' raster::plot(distance(gecko.records, alt))
 #' raster::plot(distance(gecko.records, alt, type = "average"))
 #' raster::plot(distance(gecko.records, alt, type = "mcp"))
-#' raster::plot(distance(gecko.records, alt, type = "cost"))
+#' par(userpar)
 #' @export
 distance <- function(longlat, layers, type = "minimum"){
   if(dim(layers)[3] > 1)
@@ -189,11 +190,6 @@ distance <- function(longlat, layers, type = "minimum"){
     }
     layers <- layers/nrow(longlat)
     names(layers) <- "average distance"
-  } else if (type == "cost"){
-    layers <- gdistance::transition(layers, function(x) 1/mean(x), 8)
-    layers <- gdistance::geoCorrection(layers)
-    layers <- gdistance::accCost(layers, as.matrix(longlat))
-    names(layers) <- "cost distance"
   } else {
     layers <- raster::mask(raster::distanceFromPoints(layers, longlat), layers)
     names(layers) <- "minimum distance"
@@ -211,11 +207,13 @@ distance <- function(longlat, layers, type = "minimum"){
 #' @details Clumped distribution records due to ease of accessibility of sites, emphasis of sampling on certain areas in the past, etc. may bias species distribution models.
 #' The algorithm used here eliminates records closer than a given distance to any other record. The choice of records to eliminate is random, so a number of runs are made and the one keeping more of the original records is chosen.
 #' @return A matrix of species occurrence records separated by at least the given distance.
-#' @examples records <- matrix(sample(100), ncol = 2)
+#' @examples userpar <- par(no.readonly = TRUE)
+#' records <- matrix(sample(100), ncol = 2)
 #' par(mfrow=c(1,2))
 #' graphics::plot(records)
 #' records <- thin(records, 0.1)
 #' graphics::plot(records)
+#' par(userpar)
 #' @export
 thin <- function(longlat, distance = 0.01, relative = TRUE, runs = 100){
   longlat = longlat[!duplicated(longlat),]                #first, remove duplicate rows
@@ -307,6 +305,8 @@ move <- function(longlat, layers, buffer = 0){
 #' outliers(gecko.records, gecko.layers[[1:3]])
 #' @export
 outliers <- function(longlat, layers){
+  userpar <- par(no.readonly = TRUE) 
+  on.exit(par(userpar))
   if(dim(layers)[3] == 33)      #if layers come from read
     pca <- reduce(layers[[1:19]], n = 2)
   else

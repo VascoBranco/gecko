@@ -26,9 +26,11 @@ Clumped distribution records due to ease of accessibility of sites, emphasis of 
 The algorithm used here eliminates records closer than a given distance to any other record. The choice of records to eliminate is random, so a number of runs are made and the one keeping more of the original records is chosen.
 }
 \examples{
+userpar <- par(no.readonly = TRUE)
 records <- matrix(sample(100), ncol = 2)
 par(mfrow=c(1,2))
 graphics::plot(records)
 records <- thin(records, 0.1)
 graphics::plot(records)
+par(userpar)
 }

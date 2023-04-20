@@ -1,9 +1,10 @@
 Package: gecko
 Type: Package
 Title: Geographical Ecology and Conservation Knowledge Online
-Version: 0.1.0
+Version: 0.1.1
 Depends: R (>= 4.1.0)
-Imports: raster, sp, gdistance, grDevices, graphics, stats, utils, geosphere
+Imports: raster, sp, grDevices, graphics, stats, utils, geosphere,
+        methods
 BugReports: https://github.com/VascoBranco/gecko/issues
 Authors@R: c(person("Vasco V.", "Branco", role = c("cre","aut"),  
 			email = "vasco.branco@helsinki.fi", 
@@ -25,3 +26,4 @@ RoxygenNote: 7.1.2
 Repository: CRAN
 LazyData: True
 NeedsCompilation: no
+Packaged: 2022-10-10 08:10:25 UTC; V

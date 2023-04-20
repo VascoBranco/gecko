@@ -9,9 +9,9 @@ distance(longlat, layers, type = "minimum")
 \arguments{
 \item{longlat}{Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
 
-\item{layers}{Raster* object as defined by package raster to serve as model to create distance layer. Cost surface in case of param ="cost".}
+\item{layers}{Raster* object as defined by package raster to serve as model to create distance layer.}
 
-\item{type}{text string indicating whether the output should be the "minimum", "average", "mcp" or "cost" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.}
+\item{type}{text string indicating whether the output should be the "minimum", "average" or "mcp" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.}
 }
 \value{
 A RasterLayer object.
@@ -23,6 +23,7 @@ Creates a layer depicting distances to records using the minimum, average, dista
 Using distance to records in models may help limiting the extrapolation of the predicted area much beyond known areas.
 }
 \examples{
+userpar <- par(no.readonly = TRUE) 
 data(gecko.layers)
 alt = gecko.layers[[3]]
 data(gecko.records)
@@ -32,5 +33,5 @@ points(gecko.records)
 raster::plot(distance(gecko.records, alt))
 raster::plot(distance(gecko.records, alt, type = "average"))
 raster::plot(distance(gecko.records, alt, type = "mcp"))
-raster::plot(distance(gecko.records, alt, type = "cost"))
+par(userpar)
 }
