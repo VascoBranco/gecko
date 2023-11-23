@@ -7,16 +7,16 @@
 reduce(layers, method = "pca", n = NULL, thres = NULL)
 }
 \arguments{
-\item{layers}{Raster* object as defined by package raster.}
+\item{layers}{SpatRaster. As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}.}
 
-\item{method}{Either Principal Components Analysis ("pca", default) or Pearson's correlation ("cor").}
+\item{method}{character. Either Principal Components Analysis ("pca", default) or Pearson's correlation ("cor").}
 
-\item{n}{Number of layers to reduce to.}
+\item{n}{numeric. Number of layers to reduce to.}
 
-\item{thres}{Value for pairwise Pearson's correlation above which one of the layers (randomly selected) is eliminated.}
+\item{thres}{numeric. Value for pairwise Pearson's correlation above which one of the layers (randomly selected) is eliminated.}
 }
 \value{
-A RasterStack object.
+SpatRaster.
 }
 \description{
 Reduce the number of layers by either performing a PCA on them or by eliminating highly correlated ones.

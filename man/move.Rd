@@ -7,11 +7,11 @@
 move(longlat, layers, buffer = 0)
 }
 \arguments{
-\item{longlat}{Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
+\item{longlat}{matrix. Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
 
-\item{layers}{Raster* object as defined by package raster.}
+\item{layers}{SpatRaster. As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}.}
 
-\item{buffer}{Maximum distance in map units that a record will move. If 0 all NA records will be changed.}
+\item{buffer}{numeric. Maximum distance in map units that a record will move. If 0 all \code{NA} records will be changed.}
 }
 \value{
 A matrix with new coordinate values.
@@ -23,11 +23,11 @@ Identifies and moves presence records to cells with environmental values.
 Often records are in coastal or other areas for which no environmental data is available. This function moves such records to the closest cells with data so that no information is lost during modelling.
 }
 \examples{
-rast <- raster::raster(matrix(c(rep(NA,100), rep(1,100), rep(NA,100)), ncol = 15))
-pts <- cbind(runif(100, 0, 0.55), runif(100, 0, 1))
-raster::plot(rast)
-points(pts)
-pts <- move(pts, rast)
-raster::plot(rast)
-points(pts)
+region <- terra::rast(matrix(c(rep(NA,100), rep(1,100), rep(NA,100)), ncol = 15))
+presences <- cbind(runif(100, 0, 0.55), runif(100, 0, 1))
+terra::plot(region)
+points(presences)
+presences <- move(presences, region)
+terra::plot(region)
+points(presences)
 }

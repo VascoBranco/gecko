@@ -7,10 +7,10 @@
 create.long(layers)
 }
 \arguments{
-\item{layers}{Raster* object as defined by package raster.}
+\item{layers}{SpatRaster. As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}.}
 }
 \value{
-A RasterLayer object.
+SpatRaster.
 }
 \description{
 Create a layer depicting longitude based on any other.
@@ -19,6 +19,6 @@ Create a layer depicting longitude based on any other.
 Using longitude (and latitude) in models may help limiting the extrapolation of the predicted area much beyond known areas.
 }
 \examples{
-data(gecko.layers)
-raster::plot(create.long(gecko.layers))
+region = gecko.data("layers")
+terra::plot(create.long(region))
 }

@@ -7,18 +7,18 @@
 clean(layers)
 }
 \arguments{
-\item{layers}{Raster* object as defined by package raster.}
+\item{layers}{SpatRaster. As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}.}
 }
 \value{
-A Raster* object, same class as layers.
+SpatRaster. Same class as layers.
 }
 \description{
-Crop raster layers to minimum size possible and uniformize NA values across layers.
+Crop raster layers to minimum size possible and uniformize \code{NA} values across layers.
 }
 \details{
-Excludes all marginal rows and columns with only NA values and change values to NA if they are NA in any of the layers.
+Excludes all marginal rows and columns with only \code{NA} values and change values to \code{NA} if they are \code{NA} in any of the layers.
 }
 \examples{
-data(gecko.layers)
-raster::plot(clean(gecko.layers))
+region = gecko.data("layers")
+terra::plot(clean(region))
 }

@@ -4,13 +4,14 @@
 \alias{create.north}
 \title{Create northness layer.}
 \usage{
-create.north(dem)
+create.north(layers)
 }
 \arguments{
-\item{dem}{RasterLayer object of elevation (a digital elevation model - DEM) as defined by package raster.}
+\item{layers}{SpatRaster. A layer of elevation (a digital elevation model - DEM). 
+As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}.}
 }
 \value{
-A RasterLayer object.
+SpatRaster.
 }
 \description{
 Create a layer depicting northness based on an elevation layer.
@@ -19,6 +20,6 @@ Create a layer depicting northness based on an elevation layer.
 Using elevation, aspect can be calculated. Yet, it is a circular variable (0 = 360) and has to be converted to northness and eastness to be useful for modelling.
 }
 \examples{
-data(gecko.layers)
-raster::plot(create.north(gecko.layers[[3]]))
+region = gecko.data("layers")
+terra::plot(create.north(region[[3]]))
 }

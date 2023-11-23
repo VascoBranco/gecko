@@ -1,10 +1,10 @@
 Package: gecko
 Type: Package
 Title: Geographical Ecology and Conservation Knowledge Online
-Version: 0.1.1
+Version: 1.0.0
 Depends: R (>= 4.1.0)
-Imports: raster, sp, grDevices, graphics, stats, utils, geosphere,
-        methods
+Imports: terra, sp, grDevices, graphics, stats, utils, geosphere,
+        methods, red, biomod2, kernlab
 BugReports: https://github.com/VascoBranco/gecko/issues
 Authors@R: c(person("Vasco V.", "Branco", role = c("cre","aut"),  
 			email = "vasco.branco@helsinki.fi", 
@@ -22,8 +22,7 @@ Maintainer: Vasco V. Branco <vasco.branco@helsinki.fi>
 Description: Includes a collection of geographical analysis functions aimed primarily at ecology and conservation science studies, allowing processing of both point and raster data. Future versions will integrate species threat datasets developed by the authors.
 License: GPL-2
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Repository: CRAN
-LazyData: True
 NeedsCompilation: no
-Packaged: 2022-10-10 08:10:25 UTC; V
+Packaged: 2023-11-23 11:05:28 UTC; witch-king-of-angmar

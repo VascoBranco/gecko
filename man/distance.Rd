@@ -7,14 +7,14 @@
 distance(longlat, layers, type = "minimum")
 }
 \arguments{
-\item{longlat}{Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
+\item{longlat}{matrix. Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
 
-\item{layers}{Raster* object as defined by package raster to serve as model to create distance layer.}
+\item{layers}{SpatRaster. As defined in package terra, see \code{\link[terra:rast]{terra::rast()}}. To serve as model to create distance layer.}
 
-\item{type}{text string indicating whether the output should be the "minimum", "average" or "mcp" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.}
+\item{type}{character. text string indicating whether the output should be the "minimum", "average" or "mcp" distance to all records. "mcp" means the distance to the minimum convex polygon encompassing all records.}
 }
 \value{
-A RasterLayer object.
+SpatRaster.
 }
 \description{
 Creates a layer depicting distances to records using the minimum, average, distance to the minimum convex polygon or distance taking into account a cost surface.
@@ -24,14 +24,13 @@ Using distance to records in models may help limiting the extrapolation of the p
 }
 \examples{
 userpar <- par(no.readonly = TRUE) 
-data(gecko.layers)
-alt = gecko.layers[[3]]
-data(gecko.records)
+region = gecko.data("layers")
+alt = region[[3]]
+localities = gecko.data("records")
 par(mfrow=c(3,2))
-raster::plot(alt)
-points(gecko.records)
-raster::plot(distance(gecko.records, alt))
-raster::plot(distance(gecko.records, alt, type = "average"))
-raster::plot(distance(gecko.records, alt, type = "mcp"))
+terra::plot(alt)
+points(localities)
+terra::plot(distance(localities, alt))
+terra::plot(distance(localities, alt, type = "average"))
 par(userpar)
 }

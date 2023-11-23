@@ -7,13 +7,13 @@
 thin(longlat, distance = 0.01, relative = TRUE, runs = 100)
 }
 \arguments{
-\item{longlat}{Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
+\item{longlat}{matrix. Matrix of longitude and latitude or eastness and northness (two columns in this order) of species occurrence records.}
 
-\item{distance}{Distance either in relative terms (proportion of maximum distance between any two records) or in raster units.}
+\item{distance}{numeric. Distance either in relative terms (proportion of maximum distance between any two records) or in raster units.}
 
-\item{relative}{If TRUE, represents the proportion of maximum distance between any two records. If FALSE, is in raster units.}
+\item{relative}{logical. If \code{TRUE}, represents the proportion of maximum distance between any two records. If \code{FALSE}, is in raster units.}
 
-\item{runs}{Number of runs}
+\item{runs}{numeric. Number of runs}
 }
 \value{
 A matrix of species occurrence records separated by at least the given distance.
@@ -27,10 +27,10 @@ The algorithm used here eliminates records closer than a given distance to any o
 }
 \examples{
 userpar <- par(no.readonly = TRUE)
-records <- matrix(sample(100), ncol = 2)
+occ_points <- matrix(sample(100), ncol = 2)
 par(mfrow=c(1,2))
-graphics::plot(records)
-records <- thin(records, 0.1)
-graphics::plot(records)
+graphics::plot(occ_points)
+occ_points <- thin(occ_points, 0.1)
+graphics::plot(occ_points)
 par(userpar)
 }
