@@ -68,9 +68,15 @@ area.download = function(ext, index){
   
   if (Sys.info()["sysname"] == "Linux"){
     down = download.file(raster_url, file_name)
+  } else if (Sys.info()["sysname"] == "Windows"){
+    down = system(
+      paste('curl', raster_url, '--ssl-no-revoke --output',file_name),
+      show.output.on.console = FALSE
+      )
+  } else if (Sys.info()["sysname"] == "Darwin"){
+    down = download.file(raster_url, file_name)
   } else {
-    down = system(paste('curl', raster_url, '--ssl-no-revoke --output', 
-                        file_name), show.output.on.console = FALSE)
+    down = download.file(raster_url, file_name)
   }
   
   if (down == 6){
